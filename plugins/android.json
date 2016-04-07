@@ -1,0 +1,21 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.deviceApiTest.app"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.deviceApiTest.app"
+        },
+        "com.hutchind.cordova.plugins.vitamio": {
+            "PACKAGE_NAME": "com.deviceApiTest.app"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties + VitamioNchut 02</title>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+
+    
+    
+    
+    // Wait for device API libraries to load
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
+                            'Device Cordova: '  + device.cordova  + '<br />' +
+                            'Device Platform: ' + device.platform + '<br />' +
+                            'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Model: '    + device.model    + '<br />' +
+                            'Device Manufacturer: '    + device.manufacturer    + '<br />' +
+                            'Device Serial: '    + device.serial    + '<br />' +
+                            'Device Version: '  + device.version  + '<br />';
+    }
+
+    
+    var serialAux = '80cc674e';
+    window.addEventListener('load', pageOpened, false);
+    function pageOpened(){
+        var element = document.getElementById('ajaxProperties');
+        element.innerHTML +='Start Second ajax<br>';
+
+       $.ajax({
+            type: 'GET',
+            /*url: "http://tvapi.europa-network.com/?controller=users&action=login&serial=80cc674e&pass=UnlOMQfQN0/bn88Uw/eNB3GeiXXRzIWffRcKPyPqghaxd0kXGyWziu8MBX1epQ4Qf/tcpvkGaVlS6/AlkYAT4g==&gzip=false&json=true",*/
+
+            url : "http://tvapi.europa-network.com/",
+            data: {controller : 'users', action : 'login', serial : device.serial, pass : 'UnlOMQfQN0/bn88Uw/eNB3GeiXXRzIWffRcKPyPqghaxd0kXGyWziu8MBX1epQ4Qf/tcpvkGaVlS6/AlkYAT4g==', gzip : 'false', json : 'true'},
+            dataTye : 'JSON',
+            success: function(data) 
+            {
+                element.innerHTML +='Congratulations you are in';
+                element.innerHTML += data;
+            },
+            error: function(jqXHR, textStatus, errorThrown) 
+            {
+                element.innerHTML +='Anything works bad';
+            }
+        });
+
+        element.innerHTML +='End Second ajax<br>';
+    };
+
+    function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+    
+
+    function login() 
+    {
+        var element = document.getElementById('ajaxProperties');
+        element.innerHTML = 'lalalalalalalal';
+
+        $.ajax({
+            type: 'GET',
+            url : "http://tvapi.europa-network.com/?controller=users&action=login&serial=80cc674e&pass=UnlOMQfQN0/bn88Uw/eNB3GeiXXRzIWffRcKPyPqghaxd0kXGyWziu8MBX1epQ4Qf/tcpvkGaVlS6/AlkYAT4g==&gzip=false&json=true",
+            /*data: {controller : 'users', action : 'login', serial : serialAux, pass : 'UnlOMQfQN0/bn88Uw/eNB3GeiXXRzIWffRcKPyPqghaxd0kXGyWziu8MBX1epQ4Qf/tcpvkGaVlS6/AlkYAT4g==', gzip : 'false', json : 'true'},*/
+            dataTye: "json",
+            contentType: "application/json; charset=utf-8",
+            data:"{}",
+            success: function(response) 
+            {
+                //alert('Congratulations you are in');
+                element.innerHTML +='Congratulations you are in';
+                element.innerHTML+=response;
+
+                
+                
+                element.innerHTML+=json2array(response);
+
+                if(response.success)
+                {
+                    element.innerHTML +='heee11<br>';
+                    channels = response.data.channels;
+                    if(channels)
+                    {
+                        element.innerHTML +='heee222<br>';
+                        var str, egp;
+                        var keys = Object.keys(channels);
+                        for (var i = 0, len = keys.length; i < len; i++) 
+                        {
+                          element.innerHTML+=channels[keys[i]].logo;
+                          element.innerHTML+= "<br />";
+                          element.innerHTML=channels[keys[i]].name;
+                        }
+
+                    }
+                }    
+                /*
+                element.innerHTML += response;
+                element.innerHTML += "<br><br>";
+
+                 //var coordinates = JSON.parse(response);
+                 var keys = Object.keys(response);
+
+                for (var i = 0, len = keys.length; i < len; i++) 
+                {
+                  element.innerHTML=coordinates[keys[i]];
+                }
+                
+                 //element.innerHTML = jsonStr;
+
+
+                
+               // element.innerHTML += data;
+               
+                //var jsonObject = JSON.parse(data.chanels);
+                */
+                              
+             
+            },
+            error: function(jqXHR, textStatus, errorThrown) 
+            {
+                //alert('Anything works bad');
+                element.innerHTML +='Anything works bad';
+            }
+        });
+
+        element.innerHTML += 'TTTTTTTTTTTTTTTTTTTTTTTTTTTT';
+    }
+
+
+    function catchup() 
+    {
+        var element = document.getElementById('ajaxProperties');
+        $.ajax({
+            type: 'GET',
+            url : "http://tvapi.europa-network.com/",
+            data: {controller : 'Catchup', action : 'Search', serial : serialAux, pass : 'UnlOMQfQN0/bn88Uw/eNB3GeiXXRzIWffRcKPyPqghaxd0kXGyWziu8MBX1epQ4Qf/tcpvkGaVlS6/AlkYAT4g==', search : 'news',gzip : 'false', json : 'true'},
+            success: function(data) 
+            {
+                //alert('Congratulations you are in');
+                element.innerHTML +='Congratulations you are in';
+                element.innerHTML += data;
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) 
+            {
+                //alert('Anything works bad');
+                element.innerHTML +='Anything works bad';
+            }
+        });
+    }
+
+
+    
+
+
+    function playVideo(videoUrl) 
+    {
+        // Just play a video
+       window.plugins.vitamio.playVideo(videoUrl);
+    }
+
+    </script>
+  </head>
+  <body>
+  <h1>Device Properties + VitamioNchut 02</h1>
+        
+    <h2>Device properties</h2> 
+    <p id="deviceProperties">Loading device properties...</p>
+    <br /><br />
+
+    <h2>Ajax properties</h2> 
+    <button type="button" onclick="login();">Test API login</button>
+    <p id="ajaxProperties">Loading Ajax properties Login...</p>
+    <br /><br />
+
+    <button type="button" onclick="catchup();">Test API catchup</button>
+    <p id="ajaxProperties">Loading Ajax properties catchup...</p>
+    <br /><br />
+
+    <h2>Channels</h2> 
+    <button type="button" onclick="playVideo(document.getElementById('bbc1').value);">Play Video</button>
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8001/bbc1" id="bbc1"/><br/>
+    
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('bbc2').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8002/bbc2" id="bbc2"/><br/>
+    
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('itv').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8003/itv" id="itv"/><br/>
+
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('ch4').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8006/ch4" id="ch4"/><br/>
+
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('ch5').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8007/ch5" id="ch5"/><br/>
+
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('itv2').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8004/itv2" id="itv2"/><br/>
+
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('itv3').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8012/itv3" id="itv3"/><br/>
+
+    <br />
+    <button type="button" onclick="playVideo(document.getElementById('skynews').value);">Play Video</button> 
+    Video URL: <input type="url" size="60" value="http://ssexternal.ott-iptv.com:8009/skynews" id="skynews"/><br/>
+  </body>
+</html>

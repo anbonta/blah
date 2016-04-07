@@ -1,0 +1,26 @@
+{
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist@1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "local",
+            "path": "C:\\Users\\Angel\\Downloads\\Cordova-plugins\\cordova-plugin-device-master"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.hutchind.cordova.plugins.vitamio": {
+        "source": {
+            "type": "local",
+            "path": "C:\\Users\\Angel\\Downloads\\Cordova-plugins\\Vitamio-Cordova-Plugin-master"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
